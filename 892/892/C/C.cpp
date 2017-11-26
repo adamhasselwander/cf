@@ -22,47 +22,48 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[500001];
-int dp[500002];
-int dp2[500002];
+int gcd(int x, int y)
+{
+	if (x < y) swap(x, y);
 
-int cnt[500002];
+	while (y > 0)
+	{
+		x = x % y;
+		swap(x, y);
+	}
+	return x;
+}
 
+int arr[2020];
 int main() {
+
 	int n;
 	sd(n);
 
+	int no = 0;
 	rep(i, 0, n) {
 		sd(arr[i]);
-		dp[i + 1] = dp[i] + arr[i];
+		if (arr[i] == 1) no++;
+	}
+	
+	if (no > 0) {
+		pd(n - no);
+		return 0;
 	}
 
-	revrep(i, 0, n) {
-		dp2[i] = arr[i] + dp2[i + 1];
-	}
-
-	int cnt= 0;
-	rep(i, 1, n - 1) {
-		if (dp[i] * 3 == dp[n]) {
-			rep(j, i + 1, n)
-				cnt += dp[i] == (dp[j] - dp[i]) && dp[i] == (dp[n] - dp[j]);
-
+	int score = -1;
+	rep(i, 0, n) {
+		int g = arr[i];
+		rep(j, i, n) {
+			g = gcd(g, arr[j]);
+			if (g == 1) {
+				int s = (j - i) + n - 1;
+				score = min(score, s);
+				if (score == -1) score = s;
+			}
 		}
-		else if (dp[i] * 3 > dp[n]) {
-			break;
-		}
-
 	}
 
-	pd(cnt);
+	pd(score);
+
 }
-
-
-
-
-
-
-
-
-
-

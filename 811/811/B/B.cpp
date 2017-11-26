@@ -7,7 +7,7 @@
 #define sc(n) scanf(" %c",&n) == 0
 
 #define pd(x) printf("%d", x)
-#define ps(x) printf("%s", x)
+#define ps(x) printf("%s\n", x)
 #define pl(x) printf("%I64d", x)
 
 #define rep(i, begin, end) for (decltype(begin) i = begin; i < end; i++)
@@ -22,47 +22,29 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[500001];
-int dp[500002];
-int dp2[500002];
 
-int cnt[500002];
+int arr[10000];
+int arr2[10000];
 
 int main() {
-	int n;
-	sd(n);
+	int n, m;
+	sd(n), sd(m);
 
-	rep(i, 0, n) {
-		sd(arr[i]);
-		dp[i + 1] = dp[i] + arr[i];
-	}
+	rep(i, 0, n) sd(arr[i]);
 
-	revrep(i, 0, n) {
-		dp2[i] = arr[i] + dp2[i + 1];
-	}
+	rep(i, 0, m) {
+		int l, r, x;
+		sd(l), sd(r), sd(x), x--, l--;
 
-	int cnt= 0;
-	rep(i, 1, n - 1) {
-		if (dp[i] * 3 == dp[n]) {
-			rep(j, i + 1, n)
-				cnt += dp[i] == (dp[j] - dp[i]) && dp[i] == (dp[n] - dp[j]);
-
-		}
-		else if (dp[i] * 3 > dp[n]) {
-			break;
+		int k = l;
+		rep(j, l, r) {
+			if (arr[x] > arr[j]) k++;
+			if (k > x) break;
 		}
 
+		if (k == x) ps("Yes");
+		else ps("No");
+
 	}
 
-	pd(cnt);
 }
-
-
-
-
-
-
-
-
-
-

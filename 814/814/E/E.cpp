@@ -22,47 +22,7 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[500001];
-int dp[500002];
-int dp2[500002];
-
-int cnt[500002];
 
 int main() {
-	int n;
-	sd(n);
 
-	rep(i, 0, n) {
-		sd(arr[i]);
-		dp[i + 1] = dp[i] + arr[i];
-	}
-
-	revrep(i, 0, n) {
-		dp2[i] = arr[i] + dp2[i + 1];
-	}
-
-	int cnt= 0;
-	rep(i, 1, n - 1) {
-		if (dp[i] * 3 == dp[n]) {
-			rep(j, i + 1, n)
-				cnt += dp[i] == (dp[j] - dp[i]) && dp[i] == (dp[n] - dp[j]);
-
-		}
-		else if (dp[i] * 3 > dp[n]) {
-			break;
-		}
-
-	}
-
-	pd(cnt);
 }
-
-
-
-
-
-
-
-
-
-

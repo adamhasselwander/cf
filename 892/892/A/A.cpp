@@ -22,47 +22,26 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[500001];
-int dp[500002];
-int dp2[500002];
-
-int cnt[500002];
-
+vi cans;
 int main() {
 	int n;
 	sd(n);
 
+
+	ll sum = 0;
 	rep(i, 0, n) {
-		sd(arr[i]);
-		dp[i + 1] = dp[i] + arr[i];
+		int a;
+		sd(a);
+		sum += (ll)a;
+	}
+	rep(i, 0, n) {
+		int b;
+		sd(b);
+		cans.push_back(b);
 	}
 
-	revrep(i, 0, n) {
-		dp2[i] = arr[i] + dp2[i + 1];
-	}
-
-	int cnt= 0;
-	rep(i, 1, n - 1) {
-		if (dp[i] * 3 == dp[n]) {
-			rep(j, i + 1, n)
-				cnt += dp[i] == (dp[j] - dp[i]) && dp[i] == (dp[n] - dp[j]);
-
-		}
-		else if (dp[i] * 3 > dp[n]) {
-			break;
-		}
-
-	}
-
-	pd(cnt);
+	sort(all(cans));
+	ll tv = (ll)cans[cans.size() - 1] + (ll)cans[cans.size() - 2];
+	if (tv >= sum) ps("YES");
+	else ps("NO");
 }
-
-
-
-
-
-
-
-
-
-
