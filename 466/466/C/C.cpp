@@ -23,29 +23,49 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 int arr[500001];
-int dp[500002];
+ll dp[500002];
+ll dp2[500002];
+ll sums[500002];
+
 int main() {
 	int n;
 	sd(n);
 
 	rep(i, 0, n) {
-		int t;
-		sd(t);
-
-		dp[i + 1] = dp[i] + t;
+		sd(arr[i]);
+		dp[i + 1] = dp[i] + arr[i];
 	}
 
-	int cnt= 0;
+	revrep(i, 0, n) {
+		dp2[i] = dp2[i + 1] + arr[i];
+		sums[i] = sums[i + 1] + (dp2[i] * 3 == dp[n] ?  1: 0);
+	}
+
+	//if (dp[n] % 3 != 0) {
+	//	// print here.
+	//	return 0;
+	//}
+
+	//auto bdp = lower_bound(dp, dp + n, dp[n] / 3);
+
+	//while (bdp != dp + n + 1)
+	//{
+	//	// while binary search finds dp{i] in dp2
+
+	//}
+
+	ll cnt = 0;
 	rep(i, 1, n - 1) {
 		if (dp[i] * 3 == dp[n]) {
-			rep(j, i + 1, n)
-				cnt += dp[i] == (dp[j] - dp[i]) && dp[i] == (dp[n] - dp[j]);
 
+			cnt += (ll)sums[i + 1];
+			//rep(j, i + 1, n) {
+			//	cnt += dp[i] == (dp[j] - dp[i]);
+			//}
 		}
-
 	}
 
-	pd(cnt);
+	pl(cnt);
 }
 
 
