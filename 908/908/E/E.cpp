@@ -22,39 +22,17 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[1000010];
-queue<int> qi;
+int T[50];
+
+bitset<31> bits;
 
 int main() {
-	int n, m, k;
-	sd(n), sd(m), sd(k);
 
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		arr[a] = 1;
-	}
+	int m, n;
+	sd(m), sd(n);
 
-	int nn = 1000010 - 1;
-	int res = 0;
-	rep(i, 1, nn) {
+	rep(i, 0, n) sd(T[i]);
+	
 
-		if (qi.size() > 0) {
-			int q = qi.front();
-			while (i - m >= q) {
-				qi.pop();
-				if (qi.size() == 0) break;
-				q = qi.front();
-			}
-		}
 
-		if ((int)qi.size() + 1 >= k && arr[i]) {
-			arr[i] = 0;
-			res++;
-		}
-
-		if (arr[i]) qi.push(i);
-
-	}
-	pd(res);
 }

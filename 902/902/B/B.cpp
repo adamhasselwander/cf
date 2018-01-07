@@ -22,39 +22,33 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[1000010];
-queue<int> qi;
+vi arr[10100]; // ArrayList<ArrayList<int>>, vector<vector<int>>
+int colors[10100];
 
-int main() {
-	int n, m, k;
-	sd(n), sd(m), sd(k);
+int res = 1;
 
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		arr[a] = 1;
-	}
-
-	int nn = 1000010 - 1;
-	int res = 0;
-	rep(i, 1, nn) {
-
-		if (qi.size() > 0) {
-			int q = qi.front();
-			while (i - m >= q) {
-				qi.pop();
-				if (qi.size() == 0) break;
-				q = qi.front();
-			}
-		}
-
-		if ((int)qi.size() + 1 >= k && arr[i]) {
-			arr[i] = 0;
+void dfs(int n, int c) {
+	for (int a : arr[n]) {
+			if (colors[a] != c) {
 			res++;
 		}
-
-		if (arr[i]) qi.push(i);
-
+		dfs(a, colors[a]);
 	}
+}
+
+int main() {
+	int n;
+	sd(n);
+
+	rep(i, 0, n - 1) {
+		int a;
+		sd(a);
+		arr[a - 1].push_back(i + 1);
+	}
+	
+	rep(i, 0, n) sd(colors[i]);
+
+	dfs(0, colors[0]);
+
 	pd(res);
 }

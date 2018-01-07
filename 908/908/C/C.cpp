@@ -7,6 +7,7 @@
 #define sc(n) scanf(" %c",&n) == 0
 
 #define pd(x) printf("%d", x)
+#define pd(x) printf("%d", x)
 #define ps(x) printf("%s", x)
 #define pl(x) printf("%I64d", x)
 
@@ -22,39 +23,37 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[1000010];
-queue<int> qi;
+struct pos {
+	long double x, y;
+};
+
+vector<pos> balls;
 
 int main() {
-	int n, m, k;
-	sd(n), sd(m), sd(k);
+
+	int n, rr;
+	sd(n), sd(rr);
+	long double r = rr;
 
 	rep(i, 0, n) {
-		int a;
-		sd(a);
-		arr[a] = 1;
-	}
 
-	int nn = 1000010 - 1;
-	int res = 0;
-	rep(i, 1, nn) {
+		int t;
+		sd(t);
 
-		if (qi.size() > 0) {
-			int q = qi.front();
-			while (i - m >= q) {
-				qi.pop();
-				if (qi.size() == 0) break;
-				q = qi.front();
+		long double x = t;
+		long double y = r;
+		long double d = r * 2;
+		for (pos ball : balls) {
+			
+			if (abs(ball.x - x) <= 2 * r) {
+				long double y1 = sqrt(d * d - (ball.x - x) * (ball.x - x)) + ball.y;
+				y = max(y1, y);
 			}
-		}
 
-		if ((int)qi.size() + 1 >= k && arr[i]) {
-			arr[i] = 0;
-			res++;
 		}
-
-		if (arr[i]) qi.push(i);
+		balls.push_back({ x, y });
+		printf("%.10Lf ", y);
 
 	}
-	pd(res);
+
 }

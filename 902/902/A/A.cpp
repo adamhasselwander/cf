@@ -22,39 +22,43 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[1000010];
-queue<int> qi;
-
+int arr[1000];
+int visited[10000];
 int main() {
-	int n, m, k;
-	sd(n), sd(m), sd(k);
+	int n, m;
+	sd(n), sd(m);
 
 	rep(i, 0, n) {
-		int a;
-		sd(a);
-		arr[a] = 1;
+		int a, b;
+		sd(a), sd(b);
+		arr[a] = b;
 	}
 
-	int nn = 1000010 - 1;
-	int res = 0;
-	rep(i, 1, nn) {
+	int cx = 0;
+	while (true) {
+		int x = arr[cx];
 
-		if (qi.size() > 0) {
-			int q = qi.front();
-			while (i - m >= q) {
-				qi.pop();
-				if (qi.size() == 0) break;
-				q = qi.front();
+		if (x >= m) {
+			ps("YES");
+			return 0;
+		}
+
+		bool found = false;
+		while (x >= 0)
+		{
+			if (!visited[x] && arr[x] > 0) {
+				visited[x] = 1;
+				cx = x;
+				found = true;
+				break;
 			}
+			x--;
 		}
 
-		if ((int)qi.size() + 1 >= k && arr[i]) {
-			arr[i] = 0;
-			res++;
-		}
-
-		if (arr[i]) qi.push(i);
+		if (!found) break;
 
 	}
-	pd(res);
+
+	ps("NO");
+
 }

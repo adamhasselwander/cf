@@ -22,39 +22,22 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[1000010];
-queue<int> qi;
 
+char vowels[10] = { 'a', 'e', 'i', 'o', 'u', '1' , '3', '5', '7', '9' };
+char arr[100];
 int main() {
-	int n, m, k;
-	sd(n), sd(m), sd(k);
+	cin >> arr;
+	int n = strlen(arr);
 
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		arr[a] = 1;
-	}
-
-	int nn = 9000000;
 	int res = 0;
-	rep(i, 1, nn) {
-
-		if (qi.size() > 0) {
-			int q = qi.front();
-			while (i - m >= q) {
-				qi.pop();
-				if (qi.size() == 0) break;
-				q = qi.front();
+	rep(i, 0, n) {
+		rep(j, 0, 10) {
+			if (arr[i] == vowels[j]) {
+				res++;
 			}
 		}
-
-		if ((int)qi.size() + 1 >= k && arr[i]) {
-			arr[i] = 0;
-			res++;
-		}
-
-		if (arr[i]) qi.push(i);
-
 	}
+
 	pd(res);
+
 }
