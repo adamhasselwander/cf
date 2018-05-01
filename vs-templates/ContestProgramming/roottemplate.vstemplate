@@ -1,0 +1,35 @@
+<VSTemplate Version="2.0.0" Type="ProjectGroup"  
+    xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">  
+    <TemplateData>  
+        <Name>Contest programming</Name>  
+		<DefaultName>Contest programming</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+        <Description>Test</Description>  
+		<CreateNewFolder>true</CreateNewFolder>
+        <ProjectType>VC</ProjectType> 
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    </TemplateData>  
+    <TemplateContent>
+		<ProjectCollection>
+			<ProjectTemplateLink ProjectName="A">  
+				core/MyTemplate.vstemplate  
+			</ProjectTemplateLink>  
+			<ProjectTemplateLink ProjectName="B">  
+				core/MyTemplate.vstemplate  
+			</ProjectTemplateLink>
+			<ProjectTemplateLink ProjectName="C">  
+				core/MyTemplate.vstemplate  
+			</ProjectTemplateLink>  
+			<ProjectTemplateLink ProjectName="D">  
+				core/MyTemplate.vstemplate  
+			</ProjectTemplateLink>  
+			<ProjectTemplateLink ProjectName="E">  
+				core/MyTemplate.vstemplate  
+			</ProjectTemplateLink>
+		</ProjectCollection>
+	</TemplateContent>  
+</VSTemplate>

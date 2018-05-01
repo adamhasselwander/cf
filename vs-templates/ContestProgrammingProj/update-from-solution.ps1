@@ -1,0 +1,1 @@
+Copy-Item ..\ContestProgramming\core\* ..\ContestProgrammingProj -Recurse -Force

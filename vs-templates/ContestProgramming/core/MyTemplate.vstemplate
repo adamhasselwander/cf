@@ -1,0 +1,21 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Contest programming project</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Contest programming</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Template.vcxproj" File="Template.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">Template.vcxproj.filters</ProjectItem>
+      <ProjectItem TargetFileName="$safeprojectname$.cpp">Source.cpp</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
