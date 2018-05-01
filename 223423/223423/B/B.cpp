@@ -22,49 +22,38 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[2010];
-int dp[2020];
-int dp2[2020][5];
-int di = 0;
 
+int alph[256];
+char arr[100000];
 int main() {
 
-	int n;
-	sd(n);
+	ss(arr);
+	int n = strlen(arr);
 
-	rep(i, 0, n) sd(arr[i]);
-
-	int last = arr[0];
-	dp[di]++;
-	int l = 0, r = 0;
-	rep(i, 1, n) {
-		if (arr[i] != last) {
-			last = arr[i];
-			di++;
-		}
-		dp[di]++;
+	rep(i, 0, n) {
+		alph[arr[i]]++;
 	}
-	di++;
 
-	bool twos = 0;
-	rep(j, 1, 5) {
-		bool start = arr[0] == 2;
-		int cnt = 0;
-		rep(i, 0, di) {
-			if (start == twos) {
-				cnt += dp[i];
-				dp2[i][j] = max(dp2[i - 1][j - 1] + dp[i], dp2[i - 1][j]);
-			}
-			else {
-				dp2[i][j] = max(dp2[i][j - 1], dp2[i - 1][j]);
+	int gm1 = 0;
+	int gm2 = 0;
+	int groups = 0;
 
-			}
-			start = !start;
+	rep(i, 0, 256) {
+		if (alph[i]) {
+			groups++;
 		}
-		twos = !twos;
+		if (alph[i] >= gm1) {
+			gm2 = gm1;
+			gm1 = alph[i];
+		}
+		else if (alph[i] >= gm2) {
+			gm2 = alph[i];
+		}
+
 	}
-	
 
-	pd(dp2[di - 1][4]);
-
+	if (groups == 4) ps("YES");
+	else if (groups == 3 && gm1 > 1) ps("YES");
+	else if (groups == 2 && gm1 > 1 && gm2 > 1)  ps("YES");
+	else ps("NO");
 }

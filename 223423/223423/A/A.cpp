@@ -9,6 +9,7 @@
 #define pd(x) printf("%d", x)
 #define ps(x) printf("%s", x)
 #define pl(x) printf("%I64d", x)
+#define pf(x) printf("%.6f", x)
 
 #define rep(i, begin, end) for (decltype(begin) i = begin; i < end; i++)
 #define revrep(i, begin, end) for (decltype(begin) i = end - 1; i >= begin; i--)
@@ -22,49 +23,29 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[2010];
-int dp[2020];
-int dp2[2020][5];
-int di = 0;
 
 int main() {
+	int hh, mm;
+	sd(hh), sd(mm);
 
-	int n;
-	sd(n);
+	int h, d, c, n;
+	sd(h), sd(d), sd(c), sd(n);
 
-	rep(i, 0, n) sd(arr[i]);
 
-	int last = arr[0];
-	dp[di]++;
-	int l = 0, r = 0;
-	rep(i, 1, n) {
-		if (arr[i] != last) {
-			last = arr[i];
-			di++;
-		}
-		dp[di]++;
-	}
-	di++;
 
-	bool twos = 0;
-	rep(j, 1, 5) {
-		bool start = arr[0] == 2;
-		int cnt = 0;
-		rep(i, 0, di) {
-			if (start == twos) {
-				cnt += dp[i];
-				dp2[i][j] = max(dp2[i - 1][j - 1] + dp[i], dp2[i - 1][j]);
-			}
-			else {
-				dp2[i][j] = max(dp2[i][j - 1], dp2[i - 1][j]);
+	// BUY ALL FOOD NOW
+	double priceNow = ceil((double)h / n) * c;
 
-			}
-			start = !start;
-		}
-		twos = !twos;
-	}
-	
+	int minsTo20 = 0;
+	if (hh < 20) minsTo20 = max(19 - hh, 0) * 60 + (60 - mm);
 
-	pd(dp2[di - 1][4]);
+	h += minsTo20 * d;
+	double price2000 = ceil((double)h / n) * c * 0.8;
+
+
+	pf(min(price2000, priceNow));
+
+	// BUY ALL FOOD 20 00
+
 
 }
