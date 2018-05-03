@@ -22,45 +22,27 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
-int arr[100200];
+vi arr;
 
 int main() {
-	int n;
-	sd(n);
-
-	rep(i, 0, n) sd(arr[i]);
-
-	int s, f;
-	sd(s); sd(f);
-	int d = f - s;
-
-	ll sum = 0;
-	int res = 1;
+	int n, d;
+	sd(n), sd(d);
 	rep(i, 0, n) {
-		ll ss = 0;
-		rep(j, 0, d) {
-			if (i + j >= n) break;
-			ss += (ll)arr[i + j];
-		}
-
-		int r = s;
-		int ssi = i;
-		while (ssi > 0) {
-			ssi--;
-			r--;
-			if (r == 0) r = n;
-		}
-
-		if (ss > sum) {
-			sum = ss;
-			res = r;
-		}
-		else if (ss == sum) {
-			res = min(res, r);
-		}
+		int a;
+		sd(a);
+		arr.push_back(a);
 	}
 
-	// hour f in zone si
-	pd(res);
+	sort(all(arr));
+	int best = n - 1;
+	rep(si, 0, n) {
+		revrep(ei, si, n) {
+			int dd = max(arr[ei] - arr[si], 0);
+			int b = n - (ei - si) - 1;
+			if (d >= dd && b < best) {
+				best = b;
+			}
+		}
+	}
+	pd(best);
 }
