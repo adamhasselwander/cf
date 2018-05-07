@@ -30,25 +30,56 @@ int main() {
 	cin >> n >> k >> s;
 
 	string sorted = s;
-	sort(all(s));
+	sort(all(sorted));
 
-	char lowest = s[0];
-	char highest = s[n - 1];
+	char lowest = sorted[0];
+	char highest = sorted[n - 1];
 
+	// 3 5
+	// abc
+	// ans: abcaa
 	if (n < k) {
 		rep(i, 0, n) cout << s[i];
-		rep(i, 0, n - k) cout << sorted[0];
+		rep(i, 0, k - n) cout << lowest;
 	}
 
-	if (n > k) {
-		rep(i, 0, k - 1) cout << s[i];
-		cout << s[k];
+	 //8 6
+	 //aabbccaa
+	// ans: aabcaa
+
+	// 8 6
+	// abcdef ghi
+	// ans: abcdeg
+	if (n >= k) {
+		string r = s.substr(0, k);
+		char last = r[k - 1];
+
+		int ind = k - 1;
+		while (last == highest && r[ind] == last) {
+			r[ind] = lowest;
+			ind--;
+		}
+		ind--;
+
+		// r[ind + 1] should be equal to the next char after s[ind + 1]
+		
+		rep(i, 0, n) {
+			char c = sorted[i];
+			while (sorted[i] == c) i++;
+			i--;
+			if (sorted[i] == s[ind + 1]) {
+				r[ind + 1] = sorted[i + 1];
+				break;
+			}
+		}
+
+		cout << r;
 	}
 
-	if (n == k) {
-		rep(i, 0, n - 2) cout << s[i];
-		cout << s[n - 1] << sorted[0];
-	}
+	//if (n == k) {
+	//	rep(i, 0, n - 2) cout << s[i];
+	//	cout << s[n - 1] << sorted[0];
+	//}
 
 	// if n < k
 	// take S and append smallest char in S untill S is of length k

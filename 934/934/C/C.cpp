@@ -49,11 +49,9 @@ int main() {
 	bool twos = 0;
 	rep(j, 1, 5) {
 		bool start = arr[0] == 2;
-		int cnt = 0;
 		rep(i, 0, di) {
 			if (start == twos) {
-				cnt += dp[i];
-				dp2[i][j] = max(dp2[i - 1][j - 1] + dp[i], dp2[i - 1][j]);
+				dp2[i][j] = max(dp2[i - 1][j - 1] + dp[i], dp2[i - 1][j] + dp[i]);
 			}
 			else {
 				dp2[i][j] = max(dp2[i][j - 1], dp2[i - 1][j]);
