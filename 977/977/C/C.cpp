@@ -23,20 +23,20 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
-
+int arr[200100];
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
-	}
+	int n, k;
+	sd(n), sd(k);
+	arr[0] = 1;
+	rep(i, 1, n + 1) sd(arr[i]);
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	sort(arr, arr + n + 1);
+
+	int num = arr[k];
+	if (arr[k] == arr[k + 1]) {
+		pd(-1);
 	}
-	pd(res);
+	else {
+		pd(num);
+	}
 }

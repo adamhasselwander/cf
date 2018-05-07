@@ -22,21 +22,45 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
+int visited[200100];
+vi graph[200100];
 
-set<int> s;
+// connected component is a cycle and is unvisited
+bool dfs(int node) {
+	
+	if (visited[node]) return false;
+	visited[node] = true;
+ 
+	bool cycle = true;
+
+	if (graph[node].size() != 2) cycle = false;
+
+	for (int n : graph[node]) {
+		if (visited[n]) continue;
+		bool subcycle = dfs(n);
+
+		if (!subcycle) cycle = false;
+	}
+
+	return cycle;
+}
 
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
+	int n, m;
+	sd(n), sd(m);
+
+	rep(i, 0, m) {
+		int a, b;
+		sd(a), sd(b);
+
+		graph[a].push_back(b);
+		graph[b].push_back(a);
 	}
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	int cnt = 0;
+	rep(i, 1, n + 1) {
+		if (dfs(i)) cnt++;
 	}
-	pd(res);
+
+	pd(cnt);
 }

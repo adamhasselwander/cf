@@ -22,21 +22,29 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
-set<int> s;
+char arr[100100];
+char res[100100];
 
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
-	}
+	ss(arr);
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	int n = strlen(arr);
+	memcpy(res, arr, sizeof(arr));
+
+	int i = 0;
+	for (char c = 'a'; c <= 'z'; c++)
+	{
+		if (i == n) {
+			pd(-1);
+			return 0;
+		}
+		while (arr[i++] > c) {
+			if (i == n) {
+				pd(-1);
+				return 0;
+			}
+		}
+		res[i - 1] = c;
 	}
-	pd(res);
-}
+	ps(res);
+ }

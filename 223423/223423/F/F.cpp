@@ -81,6 +81,8 @@ typedef pair<int, int> pii;
 // 8 2 = 48  = 8 * 8 - 16 
 // 9 2 = 65  = 9 * 9 - 16 
 
+// 3,8,12,21,27,40,48,65
+// (1+2*x+3*x^2)/((1-x)*(1-x^2)^2)
 
 // 3 3 = 8   = 3 * 3 - 1
 // 4 3 = 15  = 4 * 4 - 1
@@ -90,6 +92,9 @@ typedef pair<int, int> pii;
 // 8 3 = 60  = 8 * 8 - 4
 // 9 3 = 72  = 9 * 9 - 9
 
+// 8,15,24,32,45,60,72
+//  		n^2-[n/3]^2, where [] = floor. 
+// (x + 3 x^2 + 4 x^3 + 5 x^4 + 3 x^5)/(((1 - x)^3)*(1 + x + x^2)^2)
 // 1 1 1 1 1 1 1 1 1
 // 1 1 1 1 1 1 1 1 1
 // 1 1 x 1 x 1 x 1 1
@@ -174,31 +179,31 @@ int main() {
 
 
 
-		rep(j, 1, sqrt(x) + 1) {
+		//rep(j, 1, sqrt(x) + 1) {
 
-			int res = x - j * j;
-			if (res >= j * j) continue;
+		//	int res = x - j * j;
+		//	if (res >= j * j) continue;
 
-			int resroot = sqrt(res);
+		//	int resroot = sqrt(res);
 
-			int sq = round(res);
-			if (res - sq < 1e6) {
-				// res is a square
+		//	int sq = round(res);
+		//	if (res - sq < 1e6) {
+		//		// res is a square
 
-				// calculate m for n
+		//		// calculate m for n
 
-				rep(k, 2, sq) {
-					for (int l = 1; l < sq; l += k) {
+		//		rep(k, 2, sq) {
+		//			for (int l = 1; l < sq; l += k) {
 
 
 
-					}
+		//			}
 
-				}
+		//		}
 
-			}
+		//	}
 
-		}
+		//}
 
 		ps("\n");
 

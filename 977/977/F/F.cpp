@@ -22,21 +22,33 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
-set<int> s;
+map<int, int> dp;
+int arr[201000];
 
 int main() {
 	int n;
 	sd(n);
+
+	int best = 0;
+	int bi = 0;
 	rep(i, 0, n) {
 		int a;
 		sd(a);
-		s.insert(a);
+		arr[i] = a;
+		dp[a] = max(dp[a - 1] + 1, dp[a]);
+		if (dp[a] > best) {
+			best = dp[a];
+			bi = a;
+		}
 	}
+	
+	pd(dp[bi]);
+	ps("\n");
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	int j = 0;
+	rep(i, bi - dp[bi] + 1, bi + 1) {
+		while (arr[j] != i) j++;
+		pd(j + 1);
+		ps(" ");
 	}
-	pd(res);
 }

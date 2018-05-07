@@ -23,20 +23,28 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
+int p;
+
+bool isNumSlow(int n) {
+
+	for (int i = 3; i <= min(p, (int)sqrt(n)); i += 2)
+	{	
+		if (n % i == 0) return false;
+	}
+	return true;
+}
 
 int main() {
+
 	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
+	sd(p), sd(n);
+
+	revrep(i, p + 1, n + 1) {
+		if (i % 2 != 0 && isNumSlow(i)) {
+			pd(i);
+			return 0;
+		}
 	}
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
-	}
-	pd(res);
+	pd(-1);
 }

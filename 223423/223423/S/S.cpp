@@ -23,20 +23,16 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
-
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
-	}
+	int a, b;
+	sd(a), sd(b);
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
-	}
-	pd(res);
+	int dh = ceil((double)abs(a - b) / 2);
+	int dl = floor((double)abs(a - b) / 2);
+
+	int sumh = (dh * (dh + 1)) / 2;
+	int suml = (dl * (dl + 1)) / 2;
+
+
+	pd(sumh + suml);
 }

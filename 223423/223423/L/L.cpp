@@ -22,21 +22,43 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
+int dp[2000][4];
+int twos[4] = { 1,2,1,2 };
 
-set<int> s;
-
+int arr[2000];
+int ai = 0;
 int main() {
 	int n;
 	sd(n);
-	rep(i, 0, n) {
-		int a;
+
+	int a;
+	sd(a);
+
+	bool twos = a == 2;
+	int curr = a, cnt = 1;
+
+	rep(i, 1, n) {
 		sd(a);
-		s.insert(a);
+		if (a == curr) cnt++;
+		else {
+			arr[ai++] = cnt;
+			curr = a;
+			cnt = 1;
+		}
 	}
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+
+	rep(i, 0, 4) {
+
+		rep(i, 0, ai) {
+			if (twos) {
+
+			}
+			else {
+
+			}
+		}
+		twos = !twos;
 	}
-	pd(res);
+
 }

@@ -23,20 +23,38 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
-
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
-	}
+	int n, a, b;
+	sd(n), sd(a), sd(b);
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	vi curr, next;
+	rep(i, 1, n + 1) curr.push_back(i);
+
+	int round = 1;
+	while (true) {
+		for (int i = 0; i < curr.size(); i += 2)
+		{
+			int aa = curr[i];
+			int bb = curr[i + 1];
+			if ((aa == a && bb == b) || (aa == b && bb == a)) {
+				if (curr.size() == 2) {
+					ps("Final!");
+				}
+				else {
+					pd(round);
+				}
+				return 0;
+			}
+
+			if (aa == a || aa == b) next.push_back(aa);
+			else if (bb == a || bb == b) next.push_back(bb);
+			else next.push_back(aa);
+
+		}
+		round++;
+		curr = next;
+		next.clear();
 	}
-	pd(res);
+	
+
 }

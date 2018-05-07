@@ -22,21 +22,17 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
-set<int> s;
-
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
+	int m;
+	sd(m);
+	int p = 0, n = 0;
+
+	rep(i, 0, m) {
 		int a;
 		sd(a);
-		s.insert(a);
+		if (a > 0) p += a;
+		else n += a;
 	}
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
-	}
-	pd(res);
+	pd(p - n);
 }

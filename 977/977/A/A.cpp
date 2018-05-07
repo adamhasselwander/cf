@@ -23,20 +23,19 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
-
 int main() {
-	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
+	int n, k;
+	sd(n), sd(k);
+
+	while (k > 0) {
+		if (n % 10 == 0) {
+			n /= 10;
+		}
+		else {
+			n--;
+		}
+		k--;
 	}
 
-	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
-	}
-	pd(res);
+	pd(n);
 }

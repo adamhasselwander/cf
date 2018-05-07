@@ -23,20 +23,31 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
-set<int> s;
-
+map<string, int> words;
 int main() {
+
 	int n;
-	sd(n);
-	rep(i, 0, n) {
-		int a;
-		sd(a);
-		s.insert(a);
-	}
+	cin >> n;
+
+	char last;
+	cin >> last;
 
 	int res = 0;
-	for (int a : s) {
-		if (a > 0) res++;
+	string w = "";
+
+	rep(i, 1, n) {
+		char c;
+		cin >> c;
+
+		string s = string(1, last) + string(1, c);
+		words[s]++;
+		last = c;
+
+		if (words[s] > res) {
+			res = words[s];
+			w = s;
+		}
 	}
-	pd(res);
+
+	cout << w;
 }
