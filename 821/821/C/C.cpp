@@ -22,52 +22,40 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[20];
+int boxes[300100]; // Why use a stack when you can use an array.
+int bi = 0;
 
+char op[10];
 int main() {
-	int v;
-	sd(v);
+	int n;
+	sd(n);
 
-	int minv = 100000000000;
-	int mind = 1;
-	rep(i, 1, 10) {
-		sd(arr[i]);
-		if (arr[i] <= minv) {
-			minv = arr[i];
-			mind = i;
+	int curr, index = 1;
+	int ans = 0;
+	ss(op);
+
+	sd(curr);
+	boxes[bi++] = curr;
+
+	rep(i, 1, n * 2) {
+		ss(op);
+
+		if (op[0] == 'a') {
+			sd(curr);
+			boxes[bi++] = curr;
 		}
-	}
-
-	if (v < minv) {
-		pd(-1);
-		return 0;
-	}
-
-	int rem = v % minv;
-
-	int bigger = 0;
-	while (true) {
-		bool f = false;
-		
-		revrep(i, mind + 1, 10) {
-
-			if (arr[i] <= rem + minv) {
-				pd(i);
-				rem -= (arr[i] - minv);
-				f = true;
-				break;
+		else if (bi != 0) {
+			if (index == boxes[bi - 1]) {
+				bi--;
+			}
+			else {
+				bi = 0;
+				ans++;
 			}
 		}
-
-		if (!f) break;
-		bigger++;
+		if (op[0] == 'r') index++;
 	}
 
-	int mins = v / minv;
-
-
-	rep(i, bigger, mins) pd(mind);
-	
-
+	pd(ans);
 
 }

@@ -22,52 +22,36 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[20];
 
 int main() {
-	int v;
-	sd(v);
+	ll n, m, k;
+	sl(n), sl(m), sl(k);
 
-	int minv = 100000000000;
-	int mind = 1;
-	rep(i, 1, 10) {
-		sd(arr[i]);
-		if (arr[i] <= minv) {
-			minv = arr[i];
-			mind = i;
-		}
-	}
 
-	if (v < minv) {
-		pd(-1);
+	// n x m
+
+	// n m m m m
+	// n
+	// n
+	// n
+	
+	if (n > k) {
+		pd(k + 1);
+		ps(" ");
+		pd(1);
 		return 0;
 	}
 
-	int rem = v % minv;
+	k -= n;
 
-	int bigger = 0;
-	while (true) {
-		bool f = false;
-		
-		revrep(i, mind + 1, 10) {
+	// m - 1 steps to go one more row up
+	int row = n - (k / (m - 1));
+	int col = k % (m - 1);
+	if (row % 2 == 1) 
+		col = (m- 2) - col;
 
-			if (arr[i] <= rem + minv) {
-				pd(i);
-				rem -= (arr[i] - minv);
-				f = true;
-				break;
-			}
-		}
-
-		if (!f) break;
-		bigger++;
-	}
-
-	int mins = v / minv;
-
-
-	rep(i, bigger, mins) pd(mind);
-	
-
+	pd(row);
+	ps(" ");
+	pd(col + 2);
 
 }

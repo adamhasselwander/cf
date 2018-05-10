@@ -22,52 +22,46 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[20];
+struct node {
+	int a, b, i;
+};
 
+node nodes[300000];
+int ni = 0;
 int main() {
-	int v;
-	sd(v);
 
-	int minv = 100000000000;
-	int mind = 1;
-	rep(i, 1, 10) {
-		sd(arr[i]);
-		if (arr[i] <= minv) {
-			minv = arr[i];
-			mind = i;
-		}
+
+	int n;
+	sd(n);
+
+	rep(i, 1, n + 1) {
+		int a, b;
+		sd(a), sd(b);
+
+		nodes[ni++] = { a, b, i };
 	}
-
-	if (v < minv) {
-		pd(-1);
-		return 0;
-	}
-
-	int rem = v % minv;
-
-	int bigger = 0;
-	while (true) {
-		bool f = false;
-		
-		revrep(i, mind + 1, 10) {
-
-			if (arr[i] <= rem + minv) {
-				pd(i);
-				rem -= (arr[i] - minv);
-				f = true;
-				break;
-			}
-		}
-
-		if (!f) break;
-		bigger++;
-	}
-
-	int mins = v / minv;
-
-
-	rep(i, bigger, mins) pd(mind);
 	
+	sort(nodes, nodes + ni, [](const node a, const node b) {
+		if (a.a == b.a) return a.b > b.b;
+		return a.a < b.a;
+	});
+
+	int maxb = nodes[0].b;
+	int maxbi = nodes[0].i;
+	rep(i, 1, n) {
+		if (nodes[i].b <= maxb) {
+			pd(nodes[i].i);
+			ps(" ");
+			pd(maxbi);
+			return 0;
+		}else {
+			maxb = nodes[i].b;
+			maxbi = nodes[i].i;
+		}
+	}
 
 
+	pd(-1);
+	ps(" ");
+	pd(-1);
 }
