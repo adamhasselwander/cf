@@ -22,71 +22,92 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int bits[100];
+const int len = 500;
+
+int bits[len];
+int bits2[len];
 
 // convert to bits, solve easiest way for each bit
 int main() {
 	ll n;
 	int k;
-	sl(n);
-	sd(k);
+	sl(n), sd(k);
 
-	int index = 0;
 	int count = 0;
-	int totalCount = 0;
-	int first = -1;
+	int count2 = 0;
+	int offset = len / 2; // negative numbers
 
-	for (ll i = 0; i < 64; i++)
-	{
+	rep(i, (ll)0, 64) {
 		if (n & (1LL << i)) {
-			if (first == -1) first = i;
 
-			totalCount++;
-			index = i;
-			bits[i] = totalCount;
+			bits[i + offset] = 1;
+			count++;
 		}
 	}
 
-	if (totalCount > k) {
+	if (count > k) {
 		ps("No");
 		return 0;
 	}
 
 	ll res = 0;
+	memcpy(bits2, bits, sizeof(bits));
+	count2 = count;
+	int highest = 0;
+	while (k > count) {
 
-	while (true) {
-
-		if (n & (1LL << ((ll)index))) count += 1;
-
-		if (k - totalCount < count) { // <= ?
-
-			ps("Yes\n");
-			rep(i, 0, count) pd(index), ps(" ");
-
-			break;
+		revrep(i, 0, len) {
+			if (bits[i]) {
+				bits[i]--;
+				bits[i - 1] += 2;
+				count++;
+				highest = i - !(bits[i] > 0);
+				break;
+			}
 		}
+	}
+	memcpy(bits, bits2, sizeof(bits2));
+	count = count2;
 
-		totalCount += count;
-		count *= 2;
-		index--;
-
+	while (k > count) {
+		bool f = true;
+		revrep(i, 0, len) {
+			if (i == highest) break;
+			if (bits[i]) {
+				f = false;
+				bits[i]--;
+				bits[i - 1] += 2;
+				count++;
+				break;
+			}
+		}
+		if (f) break;
 	}
 
-	for (ll i = index - 1; i >= 0; i--) {
+	ps("Yes\n");
+	ll minnum = 0;
+	bool f = false;
+	revrep(i, 0, len) {
 		if (bits[i]) {
-			pd(i);
-			ps(" ");
+			bits[i]--;
+
+			if (f) {
+				pd(minnum);
+				ps(" ");
+			}
+
+			f = true;
+			minnum = i - offset;
+			i++;
 		}
 	}
 
-	first = min(first, index);
-	while (k - 1 > totalCount) {
-		totalCount += 1;
-
-		pd(--first);
+	while (k > count) {
+		minnum--;
+		pd(minnum);
 		ps(" ");
+		count++;
 	}
-
-	pd(first);
+	pd(minnum);
 
 }

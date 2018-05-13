@@ -22,52 +22,24 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[20];
+
+ll n, k, A, B;
+ll a = 0, b = 0;
+
+ll dfs(int n) {
+	if (n == 1) return 0;
+
+	ll add = A * (n - 1);
+	if (k > n || k == 1) return add;
+
+	ll div = dfs((n - (n % k)) / k) + B + A * (n % k);
+	return min(div, add);
+
+}
 
 int main() {
-	int v;
-	sd(v);
 
-	int minv = 100000000000;
-	int mind = 1;
-	rep(i, 1, 10) {
-		sd(arr[i]);
-		if (arr[i] <= minv) {
-			minv = arr[i];
-			mind = i;
-		}
-	}
+	sl(n), sl(k), sl(A), sl(B);
 
-	if (v < minv) {
-		pd(-1);
-		return 0;
-	}
-
-	int rem = v % minv;
-
-	int bigger = 0;
-	while (true) {
-		bool f = false;
-		
-		revrep(i, mind + 1, 10) {
-
-			if (arr[i] <= rem + minv) {
-				pd(i);
-				rem -= (arr[i] - minv);
-				f = true;
-				break;
-			}
-		}
-
-		if (!f) break;
-		bigger++;
-	}
-
-	int mins = v / minv;
-
-
-	rep(i, bigger, mins) pd(mind);
-	
-
-
+	pl(dfs(n));
 }

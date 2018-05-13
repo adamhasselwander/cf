@@ -24,6 +24,7 @@ typedef pair<int, int> pii;
 
 
 int arr[100200];
+int dp[200200];
 
 int main() {
 	int n;
@@ -35,22 +36,17 @@ int main() {
 	sd(s); sd(f);
 	int d = f - s;
 
+	dp[0] = arr[0];
+	rep(i, 1, n * 2 + 10) dp[i] = dp[i - 1] + arr[i % n];
+	
 	ll sum = 0;
 	int res = 1;
 	rep(i, 0, n) {
-		ll ss = 0;
-		rep(j, 0, d) {
-			if (i + j >= n) break;
-			ss += (ll)arr[i + j];
-		}
 
-		int r = s;
-		int ssi = i;
-		while (ssi > 0) {
-			ssi--;
-			r--;
-			if (r == 0) r = n;
-		}
+		ll ss = dp[i + d] - dp[i];
+
+		int r = s - ((i + 1) % n);
+		while (0 >= r) r += n;
 
 		if (ss > sum) {
 			sum = ss;

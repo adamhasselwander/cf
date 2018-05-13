@@ -22,7 +22,7 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int dp[2000][4];
+int dp[2000][5];
 int twos[4] = { 1,2,1,2 };
 
 int arr[2000];
@@ -46,19 +46,21 @@ int main() {
 			cnt = 1;
 		}
 	}
+	arr[ai++] = cnt;
 
-
-	rep(i, 0, 4) {
-
+	bool ttwwooss = 0;
+	rep(j, 1, 5) {
+		bool t = twos;
 		rep(i, 0, ai) {
-			if (twos) {
-
+			if (ttwwooss == t) {
+				dp[i][j] = max(dp[i - 1][j - 1] + arr[i], dp[i - 1][j] + arr[i]);
 			}
 			else {
-
+				dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
 			}
+			t = !t;
 		}
-		twos = !twos;
+		ttwwooss = !ttwwooss;
 	}
-
+	pd(dp[ai - 1][4]);
 }

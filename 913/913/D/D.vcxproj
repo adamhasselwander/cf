@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ac0f8962-4e88-414a-9a71-070e30e4e4ba}</ProjectGuid>
-    <RootNamespace>P</RootNamespace>
+    <ProjectGuid>{09026b28-59cd-490d-95ba-df31696d7986}</ProjectGuid>
+    <RootNamespace>D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -110,7 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="P.cpp" />
+    <ClCompile Include="D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

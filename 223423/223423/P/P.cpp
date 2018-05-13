@@ -22,6 +22,7 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
+
 set<int> s;
 
 int main() {
