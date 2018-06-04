@@ -22,10 +22,7 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int umb[2010];
 pii umb2[2010]; int ui = 0;
-
-pii intervals[2010]; int ii = 0;
 int intervals2[2010];
 
 int dp[2010]; // dp[x] = min weight at position x
@@ -37,7 +34,6 @@ int main() {
 	rep(i, 0, m) {
 		int l, r;
 		sd(l), sd(r);
-		intervals[ii++] = { l, r };
 		intervals2[l] = 2;
 		intervals2[r] = 1;
 	}
@@ -45,28 +41,12 @@ int main() {
 	rep(i, 0, n) {
 		int u, p;
 		sd(u), sd(p);
-
-		if (umb[u]) umb[u] = min(umb[u], p);
-		else umb[u] = p;
-
 		umb2[ui++] = { u, p };
 	}
 
-	sort(intervals, intervals + ii, [](pii a, pii b) {
-		return a.first < b.first;
-	});
-	
-	sort(umb2, umb2 + ui, [](pii a, pii b) {
-		return a.first < b.first;
-	});
+	sort(umb2, umb2 + ui, [](pii a, pii b) { return a.first < b.first; });
 
-	rep(i, 0, a + 1) dp[i] = INT_MAX;
-	
-	if (umb2[0].first > intervals[0].first) {
-		pd(-1);
-		return 0;
-	}
-
+	rep(i, 0, a + 10) dp[i] = INT_MAX / 2;
 	dp[0] = 0;
 
 	rep(u, 0, ui) {
@@ -74,26 +54,27 @@ int main() {
 
 		int reset = 0;
 		revrep(i, 0, ub.first) {
-			if (intervals2[i] == 2) { // found start of interval meaning that we are in an interval.
+			if (intervals2[i] == 2) // found start of interval meaning that we are in an interval.
 				reset = ub.first;
-				break;
-			}
-			else if(intervals2[i] == 1) { // found end of interval meaning that we are outside an interval and could reduce our score.
+			else if (intervals2[i] == 1) // found end of interval meaning that we are outside an interval and could reduce our score.
 				reset = i;
-				break;
-			}
+			else
+				continue;
+
+			break;
 		}
 
 		rep(i, ub.first + 1, a + 1) {
 			dp[i] = min(dp[i], dp[reset] + ub.second * (i - ub.first));
 		}
+
 	}
 
 	revrep(i, 0, a + 1) {
-		if (intervals2[i] == 1) {
-			pd(dp[i]);
-			break;
-		}
-	}
+		if (intervals2[i] != 1) continue;
 
+		if (dp[i] >= INT_MAX / 2) pd(-1);
+		else pd(dp[i]);
+		break;
+	}
 }
