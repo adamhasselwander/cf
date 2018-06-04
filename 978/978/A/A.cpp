@@ -22,55 +22,25 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-int arr[100000];
-int used[700000];
-
-vector<int> factors[700000];
-int visited[700000];
-
-bool factor(int n) {
-	
-	for (int v : factors[n]) if (used[v]) return false;
-
-	for (int v : factors[n]) used[v] = 1;
-
-	return true;
-}
-
+map<int, int> arr;
+map<int, int> arr2;
 int main() {
-
-	rep(i, 2, 700000) {
-		if (!visited[i]) {
-			for (int j = i; j < 700000; j += i)
-			{
-				factors[j].push_back(i);
-				visited[j] = 1;
-			}
-		}
-	}
-
 	int n;
 	sd(n);
-	int prev = 1;
-
-	bool bigger = 0;
-
 	rep(i, 0, n) {
-		sd(arr[i]);
-
-		int next;
-
-		if (bigger) next = prev + 1;
-		else next = arr[i];
-
-		while (!factor(next)) next++;
-
-		if (bigger) prev = next;
-
-		if (next > arr[i]) bigger = 1;
-
-		arr[i] = next;
+		int a;
+		sd(a);
+		arr[a] = i + 1;
 	}
 
-	rep(i, 0, n) pd(arr[i]);
+	for (auto ar : arr) {
+		arr2[ar.second] = ar.first;
+	}
+
+	pd(arr.size());
+	ps("\n");
+	for (auto ar : arr2) {
+		pd(ar.second);
+	}
+
 }
