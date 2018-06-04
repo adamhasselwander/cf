@@ -22,7 +22,27 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
+int arr[100000];
+int distlow[100000];
+int disthigh[100000];
+int dist[100000];
 
 int main() {
+	int n;
+	rep(i, 0, n) sd(arr[i]);
+	
+	int last = arr[0];
+	rep(i, 1, n) {
+		int d = arr[i] - last;
+		last = arr[i];
+
+		dist[i] = d;
+		distlow[i] = d - i;
+		disthigh[i] = d + i;
+	}
+
+	rep(i, 0, n) {
+
+	}
 
 }

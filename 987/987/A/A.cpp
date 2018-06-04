@@ -22,7 +22,28 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
+set<string> words = { "power", "time", "space", "soul", "reality", "mind" };
+// purple, green, blue, orange, red, yellow
+map<string, string> wordmap = { {"purple", "power"},{"green", "time"}, {"blue", "space"}, {"orange", "soul"}, {"red", "reality"}, {"yellow","mind"} };
+set<string> exclude;
 
 int main() {
+	int n;
+	cin >> n;
 
+
+	rep(i, 0, n) {
+		string s;
+		cin >> s;
+		exclude.insert(wordmap[s]);
+	}
+
+	cout << 6 - n << endl;
+	for (auto w : words) {
+		if (exclude.count(w) == 0) {
+			string str = w;
+			str[0] = toupper(str[0]);
+			cout << str << endl;
+		}
+	}
 }

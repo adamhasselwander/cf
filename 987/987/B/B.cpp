@@ -22,7 +22,23 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
 int main() {
+	long double x, y;
+	cin >> x >> y;
+
+	if (x == 1 || y == 1) {
+		if (x == y) cout << "=";
+		else if (x > y) cout << ">";
+		else cout << "<";
+		return 0;
+	}
+
+	long double d1 = y * log(x);
+	long double d2 = log(y) * x;
+
+	if (abs(d1 - d2) < .0000001) cout << "=";
+	else if (d1 < d2) cout << "<";
+	else cout << ">";
 
 }
+

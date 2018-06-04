@@ -22,55 +22,39 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-struct screen {
-	int f, c, i;
-};
-
-screen arr[3000];
-
-screen res[3000][3];
-
-int arr2[3000][3000][3];
 
 int main() {
+	// three zeros not allowed
+	// two ones not allowed
+
+	int ones = 0;
+	int zeros = 1;
 	int n;
 	sd(n);
 
 	rep(i, 0, n) {
-		int f;
-		sd(f);
-		arr[i].f = f;
-		arr[i].i = i;
-	}
-	rep(i, 0, n) {
-		int c;
-		sd(c);
-		arr[i].c = c;
-	}
+		char c;
+		sc(c);
 
-
-	int res = INT_MAX / 2;
-	bool found = 0;
-	rep(i, 1, n - 1) {
-		screen bb, ba, curr = arr[i];
-		bb.c = ba.c = INT_MAX;
-
-		rep(j, 0, i + 1) {
-			if (curr.f > arr[j].f && bb.c > arr[j].c) {
-				bb = arr[j];
-			}
+		if (c == '1') {
+			ones++;
+			zeros = 0;
 		}
-		rep(j, i + 1, n) {
-			if (curr.f < arr[j].f && ba.c > arr[j].c) {
-				ba = arr[j];
-			}
+		else {
+			ones = 0;
+			zeros++;
 		}
 
-		if (bb.c != INT_MAX && ba.c != INT_MAX) {
-			res = min(res, ba.c + bb.c + curr.c);
-			found = 1;
+		if (zeros == 3 || ones == 2) {
+			ps("No");
+			return 0;
 		}
 	}
-	if (!found) pd(-1);
-	else pd(res);
+	if (zeros == 2 || (n == 1 && zeros == 1)) {
+		ps("No");
+	}
+	else {
+		ps("Yes");
+	}
+
 }

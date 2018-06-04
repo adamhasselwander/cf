@@ -8,11 +8,12 @@
 
 #define pd(x) printf("%d ", x)
 #define ps(x) printf("%s", x)
-#define pl(x) printf("%I64d ", x)
+#define pl(x) printf("%I64d", x)
 
 #define rep(i, begin, end) for (decltype(begin) i = begin; i < end; i++)
 #define revrep(i, begin, end) for (decltype(begin) i = end - 1; i >= begin; i--)
 #define all(a) a.begin(), a.end()
+
 
 using namespace std;
 
@@ -21,34 +22,39 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-ll arr[200000];
-int room;
+struct seat {
+	int w, i;
+};
+
+seat seats[200000];
+map<int, int> iseats;
 
 int main() {
-	int n, m;
-	sd(n), sd(m);
+	int n;
+	sd(n);
+
 	rep(i, 0, n) {
-
-		ll a;
-		sl(a);
-		arr[room++] = a;
+		int w;
+		sd(w);
+		seats[i] = { w, i };
 	}
 
-	ll tot = 0;
-	ll dorm = 0;
-	room = 0;
-	rep(i, 0, m) {
-		ll index;
-		sl(index);
+	sort(seats, seats + n, [](seat a, seat b) { return a.w < b.w; });
+	int si = 0;
+	
+	rep(i, 0, n * 2) {
+		char c;
+		sc(c);
 
-		while (tot + arr[dorm] < index) {
-			tot += arr[dorm];
-			dorm++;
+		if (c == '0') {
+			seat s = seats[si++];
+			pd(s.i + 1);
+			iseats[s.w] = s.i;
 		}
-
-		pl(dorm + 1);
-		pl(index - tot);
-		ps("\n");
+		else {
+			auto s = *iseats.rbegin();
+			pd(s.second + 1);
+			iseats.erase(s.first);
+		}
 	}
-
 }
