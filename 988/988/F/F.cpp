@@ -84,16 +84,9 @@ int main() {
 			}
 		}
 
-		if (dp[reset] + ub.second * (a - ub.first) < dp[a]) {
-
-			rep(i, reset, ub.first + 1) dp[i] = dp[reset];
-
-			rep(i, ub.first + 1, a + 1) {
-				dp[i + 1] = min(dp[i + 1], dp[i] + ub.second);
-			}
-
+		rep(i, ub.first + 1, a + 1) {
+			dp[i] = min(dp[i], dp[reset] + ub.second * (i - ub.first));
 		}
-		
 	}
 
 	revrep(i, 0, a + 1) {
@@ -102,6 +95,5 @@ int main() {
 			break;
 		}
 	}
-
 
 }
