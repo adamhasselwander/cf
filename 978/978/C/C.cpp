@@ -14,7 +14,6 @@
 #define revrep(i, begin, end) for (decltype(begin) i = end - 1; i >= begin; i--)
 #define all(a) a.begin(), a.end()
 
-
 using namespace std;
 
 typedef long long ll;
@@ -29,6 +28,7 @@ int main() {
 	int n, m;
 	sd(n), sd(m);
 	rep(i, 0, n) {
+
 		ll a;
 		sl(a);
 		arr[room++] = a;
@@ -50,6 +50,5 @@ int main() {
 		pl(index - tot);
 		ps("\n");
 	}
-
 
 }

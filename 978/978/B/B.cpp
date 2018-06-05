@@ -24,5 +24,23 @@ typedef pair<int, int> pii;
 
 
 int main() {
-
+	int n;
+	sd(n);
+	int cnt = 0;
+	int ans = 0;
+	rep(i, 0, n) {
+		char c;
+		sc(c);
+		if (c == 'x') {
+			cnt++;
+			if (cnt == 3) {
+				cnt = 2;
+				ans++;
+			}
+		}
+		else {
+			cnt = 0;
+		}
+	}
+	pd(ans);
 }

@@ -22,7 +22,6 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
 set<string> words = { "power", "time", "space", "soul", "reality", "mind" };
 // purple, green, blue, orange, red, yellow
 map<string, string> wordmap = { {"purple", "power"},{"green", "time"}, {"blue", "space"}, {"orange", "soul"}, {"red", "reality"}, {"yellow","mind"} };

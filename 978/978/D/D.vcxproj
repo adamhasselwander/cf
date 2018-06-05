@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{18ad958f-00e3-4b93-8c92-858169623b9e}</ProjectGuid>
+    <ProjectGuid>{1b6bedb1-b983-4308-ad49-7fc8f89a273b}</ProjectGuid>
     <RootNamespace>D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

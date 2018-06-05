@@ -23,44 +23,31 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 int arr[100000];
-int factors[100000];
-int newfactors[100000];
+int used[700000];
 
-unsigned int gcd(unsigned int n1, unsigned int n2) {
-	return (n2 == 0) ? n1 : gcd(n2, n1 % n2);
-}
+vector<int> factors[700000];
+int visited[700000];
 
 bool factor(int n) {
-	if (newfactors[n]) return false;
+	
+	for (int v : factors[n]) if (used[v]) return false;
 
-	int z = 2;
-	bool ok = true;
+	for (int v : factors[n]) used[v] = 1;
 
-	while (n >= z * z) {
-		if (n % z == 0) {
-			if (newfactors[z]) {
-				ok = false;
-				break;
-			}
-			newfactors[z] = 1;
-			while (n % z == 0) n /= z;
-		}
-		z++;
-	}
-
-	newfactors[n] = 1;
-
-	if (ok) {
-		memcpy(factors, newfactors, sizeof(newfactors));
-	}
-	else {
-		memcpy(newfactors, factors, sizeof(factors));
-	}
-
-	return ok;
+	return true;
 }
 
 int main() {
+
+	rep(i, 2, 700000) {
+		if (!visited[i]) {
+			for (int j = i; j < 700000; j += i)
+			{
+				factors[j].push_back(i);
+				visited[j] = 1;
+			}
+		}
+	}
 
 	int n;
 	sd(n);
@@ -72,19 +59,18 @@ int main() {
 		sd(arr[i]);
 
 		int next;
-		
+
 		if (bigger) next = prev + 1;
 		else next = arr[i];
 
 		while (!factor(next)) next++;
-		
+
 		if (bigger) prev = next;
 
 		if (next > arr[i]) bigger = 1;
-		
+
 		arr[i] = next;
 	}
 
 	rep(i, 0, n) pd(arr[i]);
-
 }
