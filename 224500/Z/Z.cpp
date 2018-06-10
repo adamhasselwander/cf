@@ -24,24 +24,5 @@ typedef pair<int, int> pii;
 
 
 int main() {
-	ll k, b, n, t;
-	sl(k), sl(b), sl(n), sl(t);
 
-	ll z = 1;
-
-	while (n-- > 0) {
-		z = z * k + b;
-	}
-	
-	ll zz = t;
-	ll res = 0;
-	while (zz < z) {
-		zz = zz * k + b;
-		res++;
-	}
-	// g(0)=t,g(n)=g(n-1)*k + b
-
-	g(n) = x;
-	g(y) = x + t;
-	pl(res);
 }

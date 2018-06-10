@@ -24,24 +24,30 @@ typedef pair<int, int> pii;
 
 
 int main() {
-	ll k, b, n, t;
-	sl(k), sl(b), sl(n), sl(t);
+	ll n; sl(n);
 
-	ll z = 1;
+	//rep(n, 1, 100000) {
 
-	while (n-- > 0) {
-		z = z * k + b;
+	ll digits = log10(n) + 1;
+	ll mod = pow(10LL, digits - 1);
+	ll score = 0;
+	score += (n - mod + 1LL) * digits;
+
+	digits--;
+	ll sum = 0;
+	rep(i, 0LL, digits) {
+		sum += 9LL * (ll)pow(10LL, (ll)i) * (i + 1LL);
 	}
-	
-	ll zz = t;
-	ll res = 0;
-	while (zz < z) {
-		zz = zz * k + b;
-		res++;
-	}
-	// g(0)=t,g(n)=g(n-1)*k + b
 
-	g(n) = x;
-	g(y) = x + t;
-	pl(res);
+	//ll sum2 = 0;
+	//rep(i, 1, n + 1) {
+	//	ll d = log10(i) + 1;
+	//	sum2 += d;
+	//}
+
+	//if (sum2 != score + sum) 
+	//	ps("ERROR");
+	//}
+
+	pl(score + sum);
 }

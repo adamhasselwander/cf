@@ -6,7 +6,7 @@
 #define ss(n) scanf("%s",n) == 0
 #define sc(n) scanf(" %c",&n) == 0
 
-#define pd(x) printf("%d", x)
+#define pd(x) printf("%d ", x)
 #define ps(x) printf("%s", x)
 #define pl(x) printf("%I64d", x)
 
@@ -23,25 +23,42 @@ typedef vector<long> vl;
 typedef pair<int, int> pii;
 
 
+struct s {
+	int r, i, p;
+};
+
+s arr[2000];
+
 int main() {
-	ll k, b, n, t;
-	sl(k), sl(b), sl(n), sl(t);
-
-	ll z = 1;
-
-	while (n-- > 0) {
-		z = z * k + b;
+	int n; sd(n);
+	rep(i, 0, n) {
+		int p;
+		sd(p);
+		arr[i] = { p, i, 0 };
 	}
-	
-	ll zz = t;
-	ll res = 0;
-	while (zz < z) {
-		zz = zz * k + b;
-		res++;
-	}
-	// g(0)=t,g(n)=g(n-1)*k + b
 
-	g(n) = x;
-	g(y) = x + t;
-	pl(res);
+	sort(arr, arr + n, [](s a, s b) {
+		return a.r > b.r;
+	});
+
+	int cnt = 0;
+	int last = -1;
+	int p = 1;
+	rep(i, 0, n) {
+		if (last != arr[i].r) {
+			p += cnt;
+			cnt = 0;
+			last = arr[i].r;
+		}
+
+		arr[i].p = p;
+		cnt++;
+	}
+
+	sort(arr, arr + n, [](s a, s b) {
+		return a.i < b.i;
+	});
+
+	rep(i, 0, n) pd(arr[i].p);
+
 }

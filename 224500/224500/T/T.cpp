@@ -22,26 +22,20 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-
+int arr[6010];
 int main() {
-	ll k, b, n, t;
-	sl(k), sl(b), sl(n), sl(t);
-
-	ll z = 1;
-
-	while (n-- > 0) {
-		z = z * k + b;
+	int n; sd(n);
+	rep(i, 0, n) {
+		int a;
+		sd(a);
+		arr[a]++;
 	}
-	
-	ll zz = t;
-	ll res = 0;
-	while (zz < z) {
-		zz = zz * k + b;
-		res++;
+	int score = 0;
+	rep(i, 0, 6010) {
+		if (arr[i]) {
+			arr[i + 1] += arr[i] - 1;
+			score += arr[i] - 1;
+		}
 	}
-	// g(0)=t,g(n)=g(n-1)*k + b
-
-	g(n) = x;
-	g(y) = x + t;
-	pl(res);
+	pd(score);
 }
