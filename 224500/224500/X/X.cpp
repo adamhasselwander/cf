@@ -32,50 +32,47 @@ int bb[256];
 int cc[256];
 
 
-void print(int minb, int minc) {
-	rep(i, 0, minb) ps(b);
-	rep(i, 0, minc) ps(c);
-}
-
-void calc(int &minb, int &minc) {
-	minb = 1000000, minc = 1000000;
-	rep(i, 0, 256) {
-		if (bb[i]) minb = min(minb, aa[i] / bb[i]);
-		if (cc[i]) minc = min(minc, aa[i] / cc[i]);
-	}
-	int minb2 = 1000000, minc2 = 1000000;
-	rep(i, 0, 256) {
-		if (bb[i]) minb2 = min(minb2, (aa[i] - (cc[i] ? minc * cc[i] : 0)) / bb[i]);
-		if (cc[i]) minc2 = min(minc2, (aa[i] - (bb[i] ? minb * bb[i] : 0)) / cc[i]);
-	}
-	if (minb2 + minc > minc2 + minb) {
-		minb = minb2;
-	}
-	else {
-		minc = minc2;
-	}
-}
-
 int main() {
-	ss(a), ss(b), ss(c);
+	cin >> a >> b >> c;
 
-	int an = strlen(a), bn = strlen(b), cn = strlen(c);
+	int an = 0, bn = 0, cn = 0;
+	while (a[an]) an++;
+	while (b[bn]) bn++;
+	while (c[cn]) cn++;
+	
+	rep(i, 0, an) aa[a[i] - 'a']++;
+	rep(i, 0, bn) bb[b[i] - 'a']++;
+	rep(i, 0, cn) cc[c[i] - 'a']++;
 
-	rep(i, 0, an) aa[a[i]]++;
-	rep(i, 0, bn) bb[b[i]]++;
-	rep(i, 0, cn) cc[c[i]]++;
+	int bestb = 0;
+	int bestc = 0;
 
-	int minb;
-	int minc;
+	rep(i, 0, an / bn) {
 
-	calc(minb, minc);
-	print(minb, minc);
+		bool stop = 0;
+		rep(j, 0, 'z' - 'a' + 1) {
+			if (aa[j] - bb[j] * i < 0) {
+				stop = 1;
+				break;
+			}
+		}
 
-	rep(i, 0, 256) {
-		if (bb[i]) aa[i] -= minb * bb[i];
-		if (cc[i]) aa[i] -= minc * cc[i];
+		if (stop) break;
+
+		int minc = 1000000;
+		rep(j, 0, 'z' - 'a' + 1) if (cc[j]) minc = min(minc, (aa[j] - bb[j] * i) / cc[j]);
+		
+		if (minc + i > bestb + bestc) {
+			bestc = minc;
+			bestb = i;
+		}
+
 	}
 
-	rep(i, 0, 256) rep(j, 0, aa[i]) pc(i);
+	string s = "";
+	rep(x, 0, bestb) s += b;
+	rep(x, 0, bestc) s += c;
+	rep(x, 0, 'z' - 'a' + 1) s += string(aa[x] - bb[x] * bestb - cc[x] * bestc, x + 'a');
 
+	cout << s;
 }

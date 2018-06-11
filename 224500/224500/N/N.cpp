@@ -27,21 +27,68 @@ int main() {
 	ll k, b, n, t;
 	sl(k), sl(b), sl(n), sl(t);
 
-	ll z = 1;
+	if (k == 1) {
 
-	while (n-- > 0) {
-		z = z * k + b;
-	}
-	
-	ll zz = t;
-	ll res = 0;
-	while (zz < z) {
-		zz = zz * k + b;
-		res++;
-	}
-	// g(0)=t,g(n)=g(n-1)*k + b
+		ll z = 1;
 
-	g(n) = x;
-	g(y) = x + t;
-	pl(res);
+		while (n-- > 0) {
+			//z *= k;
+			z += b;
+
+			//z = z * k + b;
+		}
+
+		ll zz = t;
+		ll res = 0;
+		while (zz < z) {
+			//zz *= k;
+			zz += b;
+
+			//zz = zz * k + b;
+			res++;
+		}
+
+		pl(res);
+
+	}
+	else {
+		long double ans = log((long double)(b + k - 1) / (long double)(b + (k - 1) * t)) / (long double)log((long double)k) + n;
+		if (0 > ans) 
+			ans = 0;
+		pl((long long)ceil(ans));
+	}
+
 }
+
+//int main() {
+//	ll k, b, n, t;
+//	sl(k), sl(b), sl(n), sl(t);
+//
+//	//ll z = 1;
+//
+//	//while (n-- > 0) {
+//	//	z = z * k + b; // this overflows.....
+//	//}
+//	//
+//	//ll zz = t;
+//	//ll res = 0;
+//	//while (zz < z) {
+//	//	zz = zz * k + b; // this overflows.....
+//	//	res++;
+//	//}
+//	// g(0) = t, g(n) = g(n-1) * k + b
+//
+//	// g(n) = (b (k^n - 1))/(k - 1) + k^n
+//
+//	if (k == 1) {
+//		pd(n - 1);
+//		return 0;
+//	}
+//
+//
+//	long double ans = log((b + k - 1) / (long double)(b + (k - 1) * t)) / (long double)log(k) + n;
+//
+//	if (0 > ans) ans = 0;
+//
+//	pl((long long)ceil(ans));
+//}

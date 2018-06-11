@@ -22,37 +22,23 @@ typedef vector<int> vi;
 typedef vector<long> vl;
 typedef pair<int, int> pii;
 
-pii arr[100010];
+int arr[100010];
 int main() {
 	int n, m;
 	sd(n), sd(m);
+	
+	int last = 1;
 
+	ll score = 0;
 	rep(i, 0, m) {
 		int a;
 		sd(a);
-		arr[i] = { a, i + 1 };
+		
+		if (last > a) score += n - (last - a);
+		else score += a - last;
+
+		last = a;
 	}
-
-	sort(arr, arr + m, [](pii a, pii b) { 
-		if (a.first == b.first) return a.second < b.second;
-		return a.first < b.first; 
-	});
-
-	int laps = 0, index = 0;
-	rep(i, 0, m) {
-
-		bool last = (i > 0 && arr[i].first == arr[i - 1].first);
-
-		if (!last && arr[i].first < index) {
-			laps++;
-			index = arr[i].second;
-		} else if (index <= arr[i].second) {
-			index = arr[i].second;
-		} else {
-			laps++;
-			index = arr[i].second;
-		}
-	}
-
-	pl((ll)laps * n + arr[m - 1].first - 1);
-	}
+	
+	pl(score);
+}
